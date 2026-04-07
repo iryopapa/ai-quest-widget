@@ -384,8 +384,93 @@ widget.js（エントリー）
 
 ---
 
-## 11. 連絡事項
+## 11. 配信方法: GitHub Pages（無料）
+
+画像生成・組み込みが完了したら、GitHub Pagesで配信します。
+
+### 全体像
+
+```
+映せばさんのWordPressサイト            GitHub Pages（無料）
+┌────────────────────────┐     ┌────────────────────────────┐
+│                        │     │ iryopapa.github.io         │
+│  既存のページ           │     │  /ai-quest-widget/         │
+│  （動画・テキスト・     │     │   ├── ai-quest-widget.js   │
+│    小テスト）           │     │   └── assets/              │
+│                        │     │        ├── char_egg.png     │
+│  ＋                    │────→│        ├── map_bg.png       │
+│  <script src="https:// │ 読込 │        └── ...              │
+│   iryopapa.github.io/  │     │                            │
+│   ai-quest-widget/     │     │  ※ 静的ファイル配信のみ     │
+│   ai-quest-widget.js"> │     │  ※ サーバー費用ゼロ         │
+│                        │     └────────────────────────────┘
+│  ※ 既存ファイル変更なし │
+│  ※ scriptタグ1行の追加 │
+│    のみ                │
+│  ※ ウィジェットが       │
+│    読めなくてもサイト   │
+│    は正常動作           │
+└────────────────────────┘
+```
+
+### GitHub Pages 有効化手順
+
+1. GitHub で `iryopapa/ai-quest-widget` リポジトリを開く
+2. Settings → Pages → Source: 「GitHub Actions」を選択
+3. 以下の GitHub Actions ワークフローを `.github/workflows/deploy.yml` として追加:
+
+```yaml
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - uses: actions/deploy-pages@v4
+```
+
+4. `vite.config.js` の `base` を追加:
+```js
+export default defineConfig({
+  base: '/ai-quest-widget/',
+  // ... 既存設定
+})
+```
+
+5. `git push` すると自動ビルド＆デプロイ
+6. 配信URL: `https://iryopapa.github.io/ai-quest-widget/`
+
+### 映せばさんのサイトへの影響
+
+| 項目 | 影響 |
+|---|---|
+| 既存のHTML/CSS/JS | **変更なし** |
+| 既存の機能 | **影響なし**（Shadow DOMで完全隔離） |
+| ウィジェットが読めない場合 | **サイトは正常動作**（ウィジェットだけ非表示） |
+| サーバー負荷 | **ゼロ**（ファイルはGitHubから配信） |
+| データベース | **不使用** |
+| 費用 | **無料** |
+
+---
+
+## 12. 連絡事項
 
 - 画像の白背景は `CharacterView.js` の `removeWhiteBg()` で自動除去されますが、マップ画像は直接`<img>`で表示するため **透過PNG推奨** です
 - 既存キャラ画像（`char_egg.png`等）は白背景PNGですが、マップ上で使用する場合はCSS `border-radius: 50%` + `overflow: hidden` のサークル内に収まるため問題ありません
 - 音楽ファイル（`public/audio/`）は既存のものをそのまま使用しています
+- 現在のビルドは画像がBase64インライン化され18MBになる。画像最終版が揃った後、`vite.config.js` の `assetsInlineLimit` を調整し、画像を別ファイルとして出力する最適化が必要
