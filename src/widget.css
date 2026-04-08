@@ -753,19 +753,18 @@
   50% { box-shadow: 0 0 0 6px rgba(124,110,240,0.15), 0 2px 12px rgba(124,110,240,0.5); }
 }
 
-/* Node positions on 画像3 (clean mountain, no markers) */
-/* Trail: right-bottom start → left curve → zigzag up → summit center-top */
-.aqw-mnode-0 { top: 80%; left: 52%; }   /* 麓 右下 */
-.aqw-mnode-1 { top: 70%; left: 35%; }   /* 左カーブ */
-.aqw-mnode-2 { top: 60%; left: 48%; }   /* 右折り返し */
-.aqw-mnode-3 { top: 50%; left: 32%; }   /* 左折り返し */
-.aqw-mnode-4 { top: 40%; left: 42%; }   /* 右折り返し */
-.aqw-mnode-5 { top: 28%; left: 35%; }   /* 雪山左 */
-.aqw-mnode-6 { top: 17%; left: 40%; }   /* 山頂付近 */
+/* Node positions on 画像3 - verified with debug dots */
+.aqw-mnode-0 { top: 88%; left: 58%; }   /* 麓スタート */
+.aqw-mnode-1 { top: 78%; left: 40%; }   /* 左カーブ */
+.aqw-mnode-2 { top: 68%; left: 55%; }   /* 右折り返し */
+.aqw-mnode-3 { top: 58%; left: 38%; }   /* 左折り返し */
+.aqw-mnode-4 { top: 48%; left: 50%; }   /* 右折り返し */
+.aqw-mnode-5 { top: 36%; left: 42%; }   /* 上部 */
+.aqw-mnode-6 { top: 22%; left: 48%; }   /* 山頂付近 */
 /* Extra positions for 8+ chapters */
-.aqw-mnode-7 { top: 12%; left: 38%; }
-.aqw-mnode-8 { top: 8%; left: 40%; }
-.aqw-mnode-9 { top: 5%; left: 39%; }
+.aqw-mnode-7 { top: 16%; left: 46%; }
+.aqw-mnode-8 { top: 12%; left: 48%; }
+.aqw-mnode-9 { top: 8%; left: 47%; }
 
 /* Legacy - keep for other screens */
 .aqw-home-message {
