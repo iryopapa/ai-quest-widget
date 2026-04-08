@@ -46,9 +46,15 @@ export class WidgetApp {
 
     this.root.querySelector('.aqw-panel-close').addEventListener('click', () => this.closePanel());
 
-    // Prevent pull-to-refresh on mobile
+    // Prevent pull-to-refresh on mobile (only block overscroll at top)
+    let startY = 0;
+    this.screenContainer.addEventListener('touchstart', (e) => {
+      startY = e.touches[0].clientY;
+    }, { passive: true });
     this.screenContainer.addEventListener('touchmove', (e) => {
-      if (this.screenContainer.scrollTop <= 0) {
+      const currentY = e.touches[0].clientY;
+      const isScrollingDown = currentY > startY;
+      if (isScrollingDown && this.screenContainer.scrollTop <= 0) {
         e.preventDefault();
       }
     }, { passive: false });

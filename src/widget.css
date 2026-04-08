@@ -637,12 +637,6 @@
 /* Mountain card map preview on home */
 .aqw-home-map-preview {
   margin: 4px 4px 8px;
-  cursor: pointer;
-  transition: transform 0.2s var(--aqw-ease);
-}
-
-.aqw-home-map-preview:active {
-  transform: scale(0.98);
 }
 
 .aqw-mountain-card {
@@ -756,18 +750,18 @@
 }
 
 /* Node positions matched to pin markers on マップ.png */
-/* Trail: bottom-left meadow → zigzag up mountain → summit flag top-right */
-.aqw-mnode-0 { bottom: 15%; left: 18%; }   /* 麓の道入口 */
-.aqw-mnode-1 { bottom: 24%; left: 35%; }   /* 右カーブ */
-.aqw-mnode-2 { bottom: 33%; left: 22%; }   /* 左折り返し */
-.aqw-mnode-3 { bottom: 40%; left: 42%; }   /* 中腹右 */
-.aqw-mnode-4 { bottom: 50%; left: 33%; }   /* 岩場左 */
-.aqw-mnode-5 { bottom: 58%; left: 50%; }   /* 雪境界右 */
-.aqw-mnode-6 { bottom: 68%; left: 43%; }   /* 雪山上部 */
+/* Precisely matched to the colored pin icons visible in the illustration */
+.aqw-mnode-0 { top: 78%; left: 30%; }   /* 麓 緑ピン */
+.aqw-mnode-1 { top: 68%; left: 18%; }   /* 左下カーブ */
+.aqw-mnode-2 { top: 60%; left: 35%; }   /* 右折り返し */
+.aqw-mnode-3 { top: 50%; left: 25%; }   /* 中腹左 */
+.aqw-mnode-4 { top: 42%; left: 40%; }   /* 中腹右 */
+.aqw-mnode-5 { top: 30%; left: 48%; }   /* 雪山左 */
+.aqw-mnode-6 { top: 18%; left: 55%; }   /* 雪山頂上付近 */
 /* Extra positions for 8+ chapters */
-.aqw-mnode-7 { bottom: 75%; left: 50%; }
-.aqw-mnode-8 { bottom: 82%; left: 45%; }
-.aqw-mnode-9 { bottom: 88%; left: 48%; }
+.aqw-mnode-7 { top: 12%; left: 52%; }
+.aqw-mnode-8 { top: 8%; left: 56%; }
+.aqw-mnode-9 { top: 5%; left: 54%; }
 
 /* Legacy - keep for other screens */
 .aqw-home-message {
@@ -1930,7 +1924,9 @@
 }
 
 .aqw-daily-result-icon {
-  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
   margin-bottom: 8px;
 }
 

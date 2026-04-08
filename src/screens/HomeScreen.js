@@ -86,7 +86,7 @@ export class HomeScreen {
         `}
 
 
-        <div class="aqw-home-map-preview aqw-btn-go-map">
+        <div class="aqw-home-map-preview">
           <div class="aqw-mountain-card">
             <div class="aqw-mountain-card-header">
               <span class="aqw-mountain-card-title">🏔 冒険マップ</span>
@@ -114,10 +114,6 @@ export class HomeScreen {
     this.charView = new CharacterView(charContainer, this.gameState, { speechMessage: this.getMessage(stage) });
     this.charView.render();
 
-    // Event listeners
-    this.container.querySelector('.aqw-btn-go-map')?.addEventListener('click', () => {
-      this.onNavigate('map');
-    });
   }
 
   getMessage(stage) {
