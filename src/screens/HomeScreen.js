@@ -10,6 +10,7 @@ import iconCoin from '../assets/icon_coin.png';
 import iconBook from '../assets/icon_book.png';
 import iconSparkle from '../assets/icon_sparkle.png';
 import itemCrown from '../assets/item_crown.png';
+import mapMountain from '../assets/map_mountain.png';
 
 export class HomeScreen {
   constructor(container, gameState, onNavigate) {
@@ -86,23 +87,25 @@ export class HomeScreen {
 
 
         <div class="aqw-home-map-preview aqw-btn-go-map">
-          <div class="aqw-mini-mountain">
-            <div class="aqw-mini-mountain-bg">
+          <div class="aqw-mountain-card">
+            <div class="aqw-mountain-card-header">
+              <span class="aqw-mountain-card-title">🏔 冒険マップ</span>
+              <span class="aqw-mountain-card-status">${doneCount}/${total} 合目</span>
+            </div>
+            <div class="aqw-mountain-card-img" style="background-image:url('${mapMountain}')">
               ${chapters.map((ch, i) => {
                 const isDone = completed.includes(ch.id);
                 const isCurrent = !isDone && (i === 0 || completed.includes(chapters[i - 1]?.id));
-                const posX = 15 + (i % 2 === 0 ? i * 8 : 65 - i * 5);
-                const posY = 85 - ((i + 1) / total) * 75;
-                return `<div class="aqw-mini-node ${isDone ? 'aqw-mini-done' : ''} ${isCurrent ? 'aqw-mini-current' : ''}" style="left:${posX}%;top:${posY}%">
-                  ${isCurrent ? `<img src="${stage.img}" class="aqw-mini-avatar" />` : ''}
+                return `<div class="aqw-mnode aqw-mnode-${i} ${isDone ? 'aqw-mnode-done' : ''} ${isCurrent ? 'aqw-mnode-current' : ''}">
+                  <div class="aqw-mnode-dot">
+                    ${isDone ? '✓' : isCurrent ? `<img src="${stage.img}" class="aqw-mnode-avatar" />` : ''}
+                  </div>
+                  ${isCurrent ? `<span class="aqw-mnode-label">${ch.title}</span>` : ''}
                 </div>`;
               }).join('')}
-              <div class="aqw-mini-summit" style="left:45%;top:2%">🚩</div>
             </div>
-            <div class="aqw-mini-mountain-info">
-              <span class="aqw-mini-mountain-title">🏔 冒険マップ</span>
-              <span class="aqw-mini-mountain-status">${doneCount}/${total} 合目 (${mapPercent}%)</span>
-              <span class="aqw-mini-mountain-tap">タップして詳しく見る →</span>
+            <div class="aqw-mountain-card-footer">
+              <span class="aqw-mountain-card-tap">タップしてマップを見る →</span>
             </div>
           </div>
         </div>

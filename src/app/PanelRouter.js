@@ -1,5 +1,5 @@
 import { HomeScreen } from '../screens/HomeScreen.js';
-import { QuestScreen } from '../screens/QuestScreen.js';
+// QuestScreen removed - learning quizzes are handled by the host site
 import { ShopScreen } from '../screens/ShopScreen.js';
 import { BookScreen } from '../screens/BookScreen.js';
 import { AdventureMapScreen } from '../screens/AdventureMapScreen.js';
@@ -43,10 +43,6 @@ export class PanelRouter {
       case 'map':
         this.audioManager.playBgm('home');
         this.currentScreen = new AdventureMapScreen(this.screenContainer, this.gameState, nav, this.config);
-        break;
-      case 'quest':
-        this.audioManager.playBgm('quest_select');
-        this.currentScreen = new QuestScreen(this.screenContainer, this.gameState, nav, this.audioManager);
         break;
       case 'daily':
         this.audioManager.playBgm('quiz');

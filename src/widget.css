@@ -49,6 +49,14 @@
   --aqw-radius-sm: 10px;
   --aqw-radius-lg: 24px;
 
+  /* Font sizes (unified) */
+  --aqw-font-xs: 10px;
+  --aqw-font-sm: 12px;
+  --aqw-font-md: 13px;
+  --aqw-font-base: 14px;
+  --aqw-font-lg: 16px;
+  --aqw-font-xl: 20px;
+
   /* Easing */
   --aqw-ease: cubic-bezier(0.4, 0, 0.2, 1);
   --aqw-bounce-ease: cubic-bezier(0.68, -0.55, 0.27, 1.55);
@@ -58,6 +66,7 @@
   right: 0;
   z-index: 999999;
   font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: var(--aqw-font-base);
   color: var(--aqw-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -622,7 +631,7 @@
   100% { opacity: 1; transform: translateX(-50%) scale(1); }
 }
 
-/* Mini mountain map preview on home */
+/* Mountain card map preview on home */
 .aqw-home-map-preview {
   margin: 4px 4px 8px;
   cursor: pointer;
@@ -633,9 +642,7 @@
   transform: scale(0.98);
 }
 
-.aqw-mini-mountain {
-  display: flex;
-  gap: 10px;
+.aqw-mountain-card {
   background: var(--aqw-bg-card);
   border-radius: var(--aqw-radius);
   box-shadow: 0 2px 12px var(--aqw-shadow);
@@ -643,86 +650,121 @@
   overflow: hidden;
 }
 
-.aqw-mini-mountain-bg {
-  width: 100px;
-  min-height: 90px;
-  flex-shrink: 0;
-  position: relative;
-  background: linear-gradient(180deg, #c8e0ff 0%, #e0f2fe 20%, #f0f4ff 35%, #d4c5a9 55%, #a8d8a0 80%, #dcfce7 100%);
-  border-radius: var(--aqw-radius) 0 0 var(--aqw-radius);
-}
-
-.aqw-mini-node {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(200,200,210,0.5);
-  border: 1.5px solid rgba(180,180,190,0.4);
-  transform: translate(-50%, -50%);
-}
-
-.aqw-mini-node.aqw-mini-done {
-  background: var(--aqw-mint);
-  border-color: var(--aqw-mint-dark);
-  box-shadow: 0 0 4px rgba(34,197,94,0.4);
-}
-
-.aqw-mini-node.aqw-mini-current {
-  width: 18px;
-  height: 18px;
-  background: var(--aqw-lavender);
-  border-color: var(--aqw-lavender-dark);
-  box-shadow: 0 0 6px rgba(124,110,240,0.4);
-  animation: aqw-miniPulse 2s ease-in-out infinite;
-}
-
-.aqw-mini-avatar {
-  width: 14px;
-  height: 14px;
-  object-fit: contain;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-@keyframes aqw-miniPulse {
-  0%, 100% { box-shadow: 0 0 4px rgba(124,110,240,0.3); }
-  50% { box-shadow: 0 0 10px rgba(124,110,240,0.5); }
-}
-
-.aqw-mini-summit {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  font-size: 14px;
-}
-
-.aqw-mini-mountain-info {
-  flex: 1;
+.aqw-mountain-card-header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 10px 12px 10px 0;
-  gap: 3px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px 4px;
 }
 
-.aqw-mini-mountain-title {
-  font-size: 13px;
+.aqw-mountain-card-title {
+  font-size: var(--aqw-font-md);
   font-weight: 700;
   color: var(--aqw-text);
 }
 
-.aqw-mini-mountain-status {
-  font-size: 11px;
+.aqw-mountain-card-status {
+  font-size: var(--aqw-font-sm);
   font-weight: 600;
   color: var(--aqw-lavender-dark);
 }
 
-.aqw-mini-mountain-tap {
-  font-size: 10px;
+.aqw-mountain-card-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 0;
+}
+
+.aqw-mountain-card-footer {
+  padding: 4px 12px 8px;
+  text-align: right;
+}
+
+.aqw-mountain-card-tap {
+  font-size: var(--aqw-font-xs);
   color: var(--aqw-text-muted);
 }
+
+/* Mountain nodes - positioned along the trail path */
+.aqw-mnode {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 5;
+}
+
+.aqw-mnode-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.7);
+  border: 2px solid rgba(180,180,190,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: white;
+  font-weight: 900;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.aqw-mnode-done .aqw-mnode-dot {
+  background: var(--aqw-mint);
+  border-color: var(--aqw-mint-dark);
+  box-shadow: 0 0 6px rgba(34,197,94,0.4);
+}
+
+.aqw-mnode-current .aqw-mnode-dot {
+  width: 24px;
+  height: 24px;
+  background: var(--aqw-lavender);
+  border-color: var(--aqw-lavender-dark);
+  box-shadow: 0 0 0 3px rgba(124,110,240,0.25), 0 2px 8px rgba(124,110,240,0.4);
+  animation: aqw-mnodePulse 2s ease-in-out infinite;
+}
+
+.aqw-mnode-avatar {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.aqw-mnode-label {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(4px);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--aqw-lavender-dark);
+  white-space: nowrap;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+@keyframes aqw-mnodePulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(124,110,240,0.25), 0 2px 8px rgba(124,110,240,0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(124,110,240,0.15), 0 2px 12px rgba(124,110,240,0.5); }
+}
+
+/* Node positions along the mountain trail (matched to マップ.png) */
+/* Trail: bottom-left start → zigzag up to summit top-center-right */
+.aqw-mnode-0 { bottom: 14%; left: 28%; }
+.aqw-mnode-1 { bottom: 25%; left: 45%; }
+.aqw-mnode-2 { bottom: 33%; left: 32%; }
+.aqw-mnode-3 { bottom: 42%; left: 50%; }
+.aqw-mnode-4 { bottom: 52%; left: 40%; }
+.aqw-mnode-5 { bottom: 60%; left: 54%; }
+.aqw-mnode-6 { bottom: 70%; left: 48%; }
+/* Extra positions for 8+ chapters */
+.aqw-mnode-7 { bottom: 78%; left: 52%; }
+.aqw-mnode-8 { bottom: 84%; left: 46%; }
+.aqw-mnode-9 { bottom: 90%; left: 50%; }
 
 /* Legacy - keep for other screens */
 .aqw-home-message {
@@ -788,15 +830,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1px;
+  gap: 2px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px 2px;
+  padding: 6px 4px;
   border-radius: 8px;
   color: var(--aqw-text-muted);
   font-family: inherit;
-  font-size: 9px;
+  font-size: var(--aqw-font-xs);
   font-weight: 600;
   transition: color 0.2s;
   position: relative;
@@ -816,7 +858,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 48px;
+  max-width: 64px;
 }
 
 .aqw-nav-dot {
