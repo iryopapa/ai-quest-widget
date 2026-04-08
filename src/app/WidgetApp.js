@@ -45,6 +45,13 @@ export class WidgetApp {
     this.navContainer = this.root.querySelector('.aqw-nav-container');
 
     this.root.querySelector('.aqw-panel-close').addEventListener('click', () => this.closePanel());
+
+    // Prevent pull-to-refresh on mobile
+    this.screenContainer.addEventListener('touchmove', (e) => {
+      if (this.screenContainer.scrollTop <= 0) {
+        e.preventDefault();
+      }
+    }, { passive: false });
   }
 
   openPanel() {

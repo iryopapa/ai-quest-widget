@@ -2,7 +2,6 @@
 // All classes prefixed with aqw-, all DOM queries use this.container.querySelector()
 // No data reset button, added stats for totalVideos, totalTexts, dailyChallengeStreak, adventure map progress
 import { BADGES, EVOLUTION_STAGES } from '../game/Character.js';
-import { CATEGORIES } from '../game/Quiz.js';
 import iconBook from '../assets/icon_book.png';
 import iconCheck from '../assets/icon_check.png';
 import iconEffort from '../assets/icon_effort.png';
@@ -133,21 +132,6 @@ export class BookScreen {
           </div>
         </div>
 
-        <div class="aqw-book-section">
-          <h3 class="aqw-section-title"><img src="${iconBook}" style="height:20px; vertical-align:middle; mix-blend-mode:multiply;" /> カテゴリ</h3>
-          <div class="aqw-category-progress">
-            ${CATEGORIES.map(cat => {
-              const played = categoriesPlayed.includes(cat.id);
-              return `
-                <div class="aqw-cat-progress-item ${played ? 'aqw-played' : ''}">
-                  <img src="${cat.iconImg}" style="height:24px; vertical-align:middle; mix-blend-mode:multiply;" class="aqw-cat-progress-icon-img" />
-                  <span class="aqw-cat-progress-name">${cat.name}</span>
-                  <img src="${played ? iconCheck : iconLocked}" style="height:16px; mix-blend-mode:multiply; opacity:${played ? 1 : 0.5}" />
-                </div>
-              `;
-            }).join('')}
-          </div>
-        </div>
       </div>
     `;
 

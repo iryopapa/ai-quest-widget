@@ -164,6 +164,8 @@
   flex-direction: column;
   overflow: hidden;
   z-index: 999999;
+  overscroll-behavior: none;
+  touch-action: pan-y;
 }
 
 .aqw-panel.aqw-open {
@@ -211,6 +213,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 .aqw-screen-container::-webkit-scrollbar {
@@ -752,19 +755,19 @@
   50% { box-shadow: 0 0 0 6px rgba(124,110,240,0.15), 0 2px 12px rgba(124,110,240,0.5); }
 }
 
-/* Node positions along the mountain trail (matched to マップ.png) */
-/* Trail: bottom-left start → zigzag up to summit top-center-right */
-.aqw-mnode-0 { bottom: 14%; left: 28%; }
-.aqw-mnode-1 { bottom: 25%; left: 45%; }
-.aqw-mnode-2 { bottom: 33%; left: 32%; }
-.aqw-mnode-3 { bottom: 42%; left: 50%; }
-.aqw-mnode-4 { bottom: 52%; left: 40%; }
-.aqw-mnode-5 { bottom: 60%; left: 54%; }
-.aqw-mnode-6 { bottom: 70%; left: 48%; }
+/* Node positions matched to pin markers on マップ.png */
+/* Trail: bottom-left meadow → zigzag up mountain → summit flag top-right */
+.aqw-mnode-0 { bottom: 15%; left: 18%; }   /* 麓の道入口 */
+.aqw-mnode-1 { bottom: 24%; left: 35%; }   /* 右カーブ */
+.aqw-mnode-2 { bottom: 33%; left: 22%; }   /* 左折り返し */
+.aqw-mnode-3 { bottom: 40%; left: 42%; }   /* 中腹右 */
+.aqw-mnode-4 { bottom: 50%; left: 33%; }   /* 岩場左 */
+.aqw-mnode-5 { bottom: 58%; left: 50%; }   /* 雪境界右 */
+.aqw-mnode-6 { bottom: 68%; left: 43%; }   /* 雪山上部 */
 /* Extra positions for 8+ chapters */
-.aqw-mnode-7 { bottom: 78%; left: 52%; }
-.aqw-mnode-8 { bottom: 84%; left: 46%; }
-.aqw-mnode-9 { bottom: 90%; left: 50%; }
+.aqw-mnode-7 { bottom: 75%; left: 50%; }
+.aqw-mnode-8 { bottom: 82%; left: 45%; }
+.aqw-mnode-9 { bottom: 88%; left: 48%; }
 
 /* Legacy - keep for other screens */
 .aqw-home-message {

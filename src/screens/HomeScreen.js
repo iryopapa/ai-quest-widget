@@ -104,9 +104,6 @@ export class HomeScreen {
                 </div>`;
               }).join('')}
             </div>
-            <div class="aqw-mountain-card-footer">
-              <span class="aqw-mountain-card-tap">タップしてマップを見る →</span>
-            </div>
           </div>
         </div>
       </div>
