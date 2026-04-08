@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AI Quest Widget - Dev Harness</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+    .page-header {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .page-header h1 { font-size: 24px; margin-bottom: 8px; }
+    .page-header p { font-size: 14px; opacity: 0.8; }
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .card h2 { font-size: 18px; margin-bottom: 12px; color: #555; }
+    .card p { font-size: 14px; color: #666; margin-bottom: 16px; }
+    .video-placeholder {
+      background: #e0e0e0;
+      height: 200px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    .sim-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .sim-btn {
+      padding: 10px 16px;
+      border: 2px solid #667eea;
+      border-radius: 8px;
+      background: white;
+      color: #667eea;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .sim-btn:hover {
+      background: #667eea;
+      color: white;
+    }
+    .sim-btn.danger {
+      border-color: #e53e3e;
+      color: #e53e3e;
+    }
+    .sim-btn.danger:hover {
+      background: #e53e3e;
+      color: white;
+    }
+    .status-display {
+      background: #f0f0f0;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 12px;
+      margin-top: 12px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+  </style>
+  <script type="module" crossorigin src="/ai-quest-widget/assets/index-Cc4XaOKL.js"></script>
+</head>
+<body>
+  <div class="page-header">
+    <h1>AI教育カリキュラム（テストページ）</h1>
+    <p>映せばAI秘書養成講座 - ウィジェット統合テスト</p>
+  </div>
+
+  <div class="content">
+    <div class="card">
+      <h2>第3章: プロンプトエンジニアリング入門</h2>
+      <div class="video-placeholder">動画プレースホルダー（5:30）</div>
+      <p>プロンプトとは、AIに何をしてほしいか伝える「お願い文」のことです。上手な指示を出すと、AIからより良い回答が返ってきます。</p>
+    </div>
+
+    <div class="card">
+      <h2>ウィジェット連携シミュレーション</h2>
+      <p>以下のボタンで、カリキュラムサイトの学習イベントをシミュレートできます。</p>
+      <div class="sim-buttons">
+        <button class="sim-btn" onclick="AIQuest.onVideoComplete()">動画視聴完了</button>
+        <button class="sim-btn" onclick="AIQuest.onTextComplete()">テキスト読了</button>
+        <button class="sim-btn" onclick="AIQuest.onQuizPass(false)">小テスト合格</button>
+        <button class="sim-btn" onclick="AIQuest.onQuizPass(true)">小テスト満点合格</button>
+        <button class="sim-btn" onclick="AIQuest.onChapterComplete('ch3')">章クリア（第3章）</button>
+        <button class="sim-btn" onclick="AIQuest.open()">パネルを開く</button>
+        <button class="sim-btn" onclick="AIQuest.close()">パネルを閉じる</button>
+      </div>
+      <div class="status-display" id="status-display">
+        ステータスがここに表示されます...
+      </div>
+      <div style="margin-top:8px;">
+        <button class="sim-btn" onclick="updateStatus()">ステータス更新</button>
+        <button class="sim-btn danger" onclick="localStorage.removeItem('ai-quest-widget-save');location.reload();">データリセット</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>第4章: AIの安全な活用法</h2>
+      <div class="video-placeholder">動画プレースホルダー（7:15）</div>
+      <p>AIチャットに個人情報を入力しないようにしましょう。データが学習に使われる可能性があります。</p>
+    </div>
+  </div>
+
+  <script>
+    // Widget configuration — this is what WordPress would set
+    window.AIQuestConfig = {
+      chapters: [
+        { id: 'ch1', title: '第1章 AIとは？', items: 3 },
+        { id: 'ch2', title: '第2章 生成AIの基礎', items: 4 },
+        { id: 'ch3', title: '第3章 プロンプト術', items: 5 },
+        { id: 'ch4', title: '第4章 AIの安全な活用', items: 3 },
+        { id: 'ch5', title: '第5章 AI秘書の実践', items: 6 },
+        { id: 'ch6', title: '第6章 業務自動化', items: 4 },
+        { id: 'ch7', title: '第7章 AI秘書マスター', items: 5 },
+      ],
+    };
+
+    function updateStatus() {
+      const state = AIQuest.getState();
+      if (state) {
+        const display = document.getElementById('status-display');
+        display.textContent = JSON.stringify(state, null, 2);
+      }
+    }
+  </script>
+</body>
+</html>
