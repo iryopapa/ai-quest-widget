@@ -10,7 +10,7 @@ import iconCoin from '../assets/icon_coin.png';
 import iconBook from '../assets/icon_book.png';
 import iconSparkle from '../assets/icon_sparkle.png';
 import itemCrown from '../assets/item_crown.png';
-import mapMountain from '../assets/map_mountain.png';
+import mapMountain from '../assets/map_mountain_clean.png';
 
 export class HomeScreen {
   constructor(container, gameState, onNavigate) {

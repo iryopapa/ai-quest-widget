@@ -189,19 +189,23 @@
 }
 
 .aqw-panel-title {
+  font-family: inherit;
   font-weight: 700;
-  font-size: 15px;
+  font-size: var(--aqw-font-lg);
 }
 
 .aqw-panel-close {
-  background: none;
+  background: rgba(255,255,255,0.15);
   border: none;
   color: white;
-  font-size: 18px;
+  font-family: inherit;
+  font-size: var(--aqw-font-sm);
+  font-weight: 600;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 8px;
+  padding: 6px 12px;
+  border-radius: 20px;
   transition: background 0.2s;
+  white-space: nowrap;
 }
 
 .aqw-panel-close:hover {
@@ -749,19 +753,19 @@
   50% { box-shadow: 0 0 0 6px rgba(124,110,240,0.15), 0 2px 12px rgba(124,110,240,0.5); }
 }
 
-/* Node positions matched to pin markers on マップ.png */
-/* Precisely matched to the colored pin icons visible in the illustration */
-.aqw-mnode-0 { top: 78%; left: 30%; }   /* 麓 緑ピン */
-.aqw-mnode-1 { top: 68%; left: 18%; }   /* 左下カーブ */
-.aqw-mnode-2 { top: 60%; left: 35%; }   /* 右折り返し */
-.aqw-mnode-3 { top: 50%; left: 25%; }   /* 中腹左 */
-.aqw-mnode-4 { top: 42%; left: 40%; }   /* 中腹右 */
-.aqw-mnode-5 { top: 30%; left: 48%; }   /* 雪山左 */
-.aqw-mnode-6 { top: 18%; left: 55%; }   /* 雪山頂上付近 */
+/* Node positions on 画像3 (clean mountain, no markers) */
+/* Trail: right-bottom start → left curve → zigzag up → summit center-top */
+.aqw-mnode-0 { top: 80%; left: 52%; }   /* 麓 右下 */
+.aqw-mnode-1 { top: 70%; left: 35%; }   /* 左カーブ */
+.aqw-mnode-2 { top: 60%; left: 48%; }   /* 右折り返し */
+.aqw-mnode-3 { top: 50%; left: 32%; }   /* 左折り返し */
+.aqw-mnode-4 { top: 40%; left: 42%; }   /* 右折り返し */
+.aqw-mnode-5 { top: 28%; left: 35%; }   /* 雪山左 */
+.aqw-mnode-6 { top: 17%; left: 40%; }   /* 山頂付近 */
 /* Extra positions for 8+ chapters */
-.aqw-mnode-7 { top: 12%; left: 52%; }
-.aqw-mnode-8 { top: 8%; left: 56%; }
-.aqw-mnode-9 { top: 5%; left: 54%; }
+.aqw-mnode-7 { top: 12%; left: 38%; }
+.aqw-mnode-8 { top: 8%; left: 40%; }
+.aqw-mnode-9 { top: 5%; left: 39%; }
 
 /* Legacy - keep for other screens */
 .aqw-home-message {
@@ -899,7 +903,8 @@
 }
 
 .aqw-screen-title {
-  font-size: 16px;
+  font-family: inherit;
+  font-size: var(--aqw-font-lg);
   font-weight: 700;
   color: var(--aqw-text);
 }
@@ -1411,7 +1416,8 @@
 }
 
 .aqw-section-title {
-  font-size: 14px;
+  font-family: inherit;
+  font-size: var(--aqw-font-base);
   font-weight: 700;
   color: var(--aqw-text);
   margin-bottom: 10px;
@@ -1440,26 +1446,47 @@
 
 .aqw-evolution-card {
   flex-shrink: 0;
-  width: 80px;
+  width: 90px;
   background: var(--aqw-bg-card);
   border: 1px solid var(--aqw-border);
   border-radius: var(--aqw-radius-sm);
-  padding: 10px 8px;
+  padding: 10px 6px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .aqw-evolution-card img {
   width: 48px;
   height: 48px;
   object-fit: contain;
-  image-rendering: pixelated;
 }
 
 .aqw-evolution-card .aqw-evo-name {
-  font-size: 9px;
+  font-size: var(--aqw-font-xs);
   font-weight: 700;
   color: var(--aqw-text);
   margin-top: 4px;
+  white-space: nowrap;
+}
+
+.aqw-evolution-card .aqw-evo-level {
+  font-size: var(--aqw-font-xs);
+  font-weight: 500;
+  color: var(--aqw-text-light);
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.aqw-evolution-card .aqw-evo-emoji {
+  font-size: 24px;
+  line-height: 48px;
+  color: var(--aqw-text-muted);
+}
+
+.aqw-evolution-card.aqw-locked {
+  opacity: 0.6;
 }
 
 /* Badge Grid */
