@@ -393,6 +393,7 @@
 /* Character Container */
 .aqw-character-container {
   padding: 0 12px;
+  position: relative;
 }
 
 .aqw-character-stage {
@@ -582,19 +583,154 @@
 }
 
 /* Home Message */
+/* Speech bubble inside character stage */
+.aqw-char-speech-bubble {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--aqw-text);
+  box-shadow: 0 2px 6px var(--aqw-shadow);
+  z-index: 10;
+  max-width: 85%;
+  text-align: center;
+  animation: aqw-bubbleIn 0.5s var(--aqw-bounce-ease);
+  white-space: nowrap;
+}
+
+.aqw-char-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(255,255,255,0.92);
+}
+
+@keyframes aqw-bubbleIn {
+  0% { opacity: 0; transform: translateX(-50%) scale(0.8); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+/* Mini mountain map preview on home */
+.aqw-home-map-preview {
+  margin: 4px 4px 8px;
+  cursor: pointer;
+  transition: transform 0.2s var(--aqw-ease);
+}
+
+.aqw-home-map-preview:active {
+  transform: scale(0.98);
+}
+
+.aqw-mini-mountain {
+  display: flex;
+  gap: 10px;
+  background: var(--aqw-bg-card);
+  border-radius: var(--aqw-radius);
+  box-shadow: 0 2px 12px var(--aqw-shadow);
+  border: 1px solid var(--aqw-border);
+  overflow: hidden;
+}
+
+.aqw-mini-mountain-bg {
+  width: 100px;
+  min-height: 90px;
+  flex-shrink: 0;
+  position: relative;
+  background: linear-gradient(180deg, #c8e0ff 0%, #e0f2fe 20%, #f0f4ff 35%, #d4c5a9 55%, #a8d8a0 80%, #dcfce7 100%);
+  border-radius: var(--aqw-radius) 0 0 var(--aqw-radius);
+}
+
+.aqw-mini-node {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(200,200,210,0.5);
+  border: 1.5px solid rgba(180,180,190,0.4);
+  transform: translate(-50%, -50%);
+}
+
+.aqw-mini-node.aqw-mini-done {
+  background: var(--aqw-mint);
+  border-color: var(--aqw-mint-dark);
+  box-shadow: 0 0 4px rgba(34,197,94,0.4);
+}
+
+.aqw-mini-node.aqw-mini-current {
+  width: 18px;
+  height: 18px;
+  background: var(--aqw-lavender);
+  border-color: var(--aqw-lavender-dark);
+  box-shadow: 0 0 6px rgba(124,110,240,0.4);
+  animation: aqw-miniPulse 2s ease-in-out infinite;
+}
+
+.aqw-mini-avatar {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes aqw-miniPulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(124,110,240,0.3); }
+  50% { box-shadow: 0 0 10px rgba(124,110,240,0.5); }
+}
+
+.aqw-mini-summit {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+}
+
+.aqw-mini-mountain-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 12px 10px 0;
+  gap: 3px;
+}
+
+.aqw-mini-mountain-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--aqw-text);
+}
+
+.aqw-mini-mountain-status {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--aqw-lavender-dark);
+}
+
+.aqw-mini-mountain-tap {
+  font-size: 10px;
+  color: var(--aqw-text-muted);
+}
+
+/* Legacy - keep for other screens */
 .aqw-home-message {
-  padding: 0 12px 8px;
+  display: none;
 }
 
 .aqw-message-bubble {
-  background: var(--aqw-bg-card);
-  border: 1px solid var(--aqw-border);
-  border-radius: var(--aqw-radius-sm);
-  padding: 10px 14px;
-  font-size: 12px;
-  color: var(--aqw-text);
-  line-height: 1.6;
-  box-shadow: 0 2px 8px var(--aqw-shadow);
+  display: none;
 }
 
 /* Daily Quick Button */

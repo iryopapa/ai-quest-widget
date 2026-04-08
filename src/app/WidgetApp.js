@@ -33,7 +33,7 @@ export class WidgetApp {
       <div class="aqw-panel">
         <div class="aqw-panel-header">
           <span class="aqw-panel-title">AI Quest</span>
-          <button class="aqw-panel-close">\u2715</button>
+          <button class="aqw-panel-close">AI講座にもどる ▸</button>
         </div>
         <div class="aqw-screen-container"></div>
         <div class="aqw-nav-container"></div>

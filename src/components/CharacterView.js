@@ -102,10 +102,11 @@ const ACCESSORY_POSITIONS = {
 const processedImageCache = {};
 
 export class CharacterView {
-  constructor(container, gameState) {
+  constructor(container, gameState, options = {}) {
     this.container = container;
     this.gameState = gameState;
     this.animFrame = null;
+    this.speechMessage = options.speechMessage || null;
   }
 
   render() {
@@ -124,6 +125,7 @@ export class CharacterView {
 
     this.container.innerHTML = `
       <div class="aqw-character-stage ${bgClass}">
+        ${this.speechMessage ? `<div class="aqw-char-speech-bubble">${this.speechMessage}</div>` : ''}
         <div class="aqw-character-sparkles aqw-sparkles-container"></div>
         <div class="aqw-character-body">
           <canvas class="aqw-char-canvas" width="${CANVAS_W}" height="${CANVAS_H}"></canvas>

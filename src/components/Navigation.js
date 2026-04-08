@@ -24,9 +24,6 @@ export class Navigation {
         <button class="aqw-nav-btn ${this.activeTab === 'home' ? 'aqw-active' : ''}" data-screen="home">
           <img src="${iconHome}" class="aqw-nav-icon-img" /> <span class="aqw-nav-label">ホーム</span>
         </button>
-        <button class="aqw-nav-btn ${this.activeTab === 'map' ? 'aqw-active' : ''}" data-screen="map">
-          <img src="${iconQuest}" class="aqw-nav-icon-img" /> <span class="aqw-nav-label">マップ</span>
-        </button>
         <button class="aqw-nav-btn ${this.activeTab === 'quest' ? 'aqw-active' : ''}" data-screen="quest">
           <img src="${iconBookNav}" class="aqw-nav-icon-img" /> <span class="aqw-nav-label">クエスト</span>
         </button>

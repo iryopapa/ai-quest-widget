@@ -32,6 +32,13 @@ export class HomeScreen {
     const multiplier = getMultiplier(streak);
     const dailyDone = this.gameState.get('dailyChallengeDate') === new Date().toISOString().slice(0, 10);
 
+    // Adventure map data
+    const chapters = this.gameState._config?.chapters || (typeof window !== 'undefined' && window.AIQuestConfig?.chapters) || [];
+    const completed = this.gameState.get('chaptersCompleted') || [];
+    const total = chapters.length;
+    const doneCount = completed.length;
+    const mapPercent = total > 0 ? Math.round((doneCount / total) * 100) : 0;
+
     this.container.innerHTML = `
       <div class="aqw-screen aqw-home-screen">
         <header class="aqw-home-header">
@@ -77,38 +84,39 @@ export class HomeScreen {
           </div>
         `}
 
-        <div class="aqw-home-actions">
-          <button class="aqw-action-btn aqw-quest-btn aqw-btn-go-quest">
-            <img src="${iconBook}" style="height:22px; margin-bottom:2px;" class="aqw-action-icon-img" />
-            <span class="aqw-action-text">クエストに出発！</span>
-            <span class="aqw-action-sub">3問チャレンジ</span>
-          </button>
-          ${!dailyDone ? `
-            <button class="aqw-action-btn aqw-daily-btn aqw-btn-go-daily">
-              <img src="${iconSparkle}" style="height:22px; margin-bottom:2px;" class="aqw-action-icon-img" />
-              <span class="aqw-action-text">今日の1問</span>
-              <span class="aqw-action-sub">デイリーチャレンジ</span>
-            </button>
-          ` : ''}
-        </div>
 
-        <div class="aqw-home-message">
-          <span class="aqw-message-bubble">${this.getMessage(stage)}</span>
+        <div class="aqw-home-map-preview aqw-btn-go-map">
+          <div class="aqw-mini-mountain">
+            <div class="aqw-mini-mountain-bg">
+              ${chapters.map((ch, i) => {
+                const isDone = completed.includes(ch.id);
+                const isCurrent = !isDone && (i === 0 || completed.includes(chapters[i - 1]?.id));
+                const posX = 15 + (i % 2 === 0 ? i * 8 : 65 - i * 5);
+                const posY = 85 - ((i + 1) / total) * 75;
+                return `<div class="aqw-mini-node ${isDone ? 'aqw-mini-done' : ''} ${isCurrent ? 'aqw-mini-current' : ''}" style="left:${posX}%;top:${posY}%">
+                  ${isCurrent ? `<img src="${stage.img}" class="aqw-mini-avatar" />` : ''}
+                </div>`;
+              }).join('')}
+              <div class="aqw-mini-summit" style="left:45%;top:2%">🚩</div>
+            </div>
+            <div class="aqw-mini-mountain-info">
+              <span class="aqw-mini-mountain-title">🏔 冒険マップ</span>
+              <span class="aqw-mini-mountain-status">${doneCount}/${total} 合目 (${mapPercent}%)</span>
+              <span class="aqw-mini-mountain-tap">タップして詳しく見る →</span>
+            </div>
+          </div>
         </div>
       </div>
     `;
 
     // Render character
     const charContainer = this.container.querySelector('.aqw-home-character');
-    this.charView = new CharacterView(charContainer, this.gameState);
+    this.charView = new CharacterView(charContainer, this.gameState, { speechMessage: this.getMessage(stage) });
     this.charView.render();
 
     // Event listeners
-    this.container.querySelector('.aqw-btn-go-quest')?.addEventListener('click', () => {
-      this.onNavigate('quest');
-    });
-    this.container.querySelector('.aqw-btn-go-daily')?.addEventListener('click', () => {
-      this.onNavigate('daily');
+    this.container.querySelector('.aqw-btn-go-map')?.addEventListener('click', () => {
+      this.onNavigate('map');
     });
   }
 
