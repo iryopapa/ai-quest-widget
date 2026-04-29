@@ -1,0 +1,197 @@
+/* CharacterViewV2 styles. Compound selectors used where we coexist with widget.css's
+   aqw-character-* classes — the v2 element gets BOTH classes, and the compound
+   selector here ensures higher specificity than widget.css's single-class rules. */
+
+.aqw-v2-stage,
+.aqw-character-stage.aqw-v2-stage {
+  position: relative;
+  margin: 0 auto;
+  /* Override widget.css's height:200px on .aqw-character-stage so the inline
+     height:220px from V2 takes effect. */
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* The body is the "animated parent". Accessories live inside and inherit motion.
+   Compound selector beats widget.css's .aqw-character-body { position: relative }. */
+.aqw-v2-char-body,
+.aqw-character-body.aqw-v2-char-body {
+  position: absolute;
+  inset: 0;
+  animation: aqw-v2-breath 2.4s ease-in-out infinite;
+  transform-origin: 50% 90%;
+  will-change: transform;
+}
+
+/* When character is a Lottie (which carries its own breath), suppress CSS breath. */
+.aqw-v2-char-body.aqw-v2-no-css-breath {
+  animation: none;
+}
+
+.aqw-v2-char-host {
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  width: 160px;
+  height: 160px;
+}
+.aqw-v2-char-host > * { width: 100%; height: 100%; }
+
+@keyframes aqw-v2-breath {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  50%      { transform: translateY(-4px) rotate(-1deg) scale(1.015); }
+}
+
+/* Phase 1a: char img rendered inside .aqw-v2-char-host */
+.aqw-v2-char-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  /* PNG has white background; this matches the existing widget's removeWhiteBg trick. */
+  mix-blend-mode: multiply;
+}
+
+/* Ground shadow (visual contact with floor) */
+.aqw-v2-ground-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  width: 110px;
+  height: 14px;
+  margin-left: -55px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.25), rgba(0,0,0,0) 70%);
+  filter: blur(2px);
+  z-index: 0;
+}
+
+/* ---- Accessory slot (anchor-following container) ---- */
+
+.aqw-v2-acc-slot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+.aqw-v2-acc-shadow {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 80%;
+  height: 14%;
+  margin-left: -40%;
+  margin-top: -8%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.aqw-v2-acc-body {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: multiply; /* PNG with white bg */
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* ---- CSS effect animations (替わり: ミニLottie前の段階) ---- */
+
+.aqw-v2-fx-sway {
+  animation: aqw-v2-sway 3.4s ease-in-out infinite;
+  transform-origin: 50% 0%;
+}
+@keyframes aqw-v2-sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50%      { transform: rotate(3deg); }
+}
+
+.aqw-v2-fx-bobble {
+  animation: aqw-v2-bobble 1.6s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+@keyframes aqw-v2-bobble {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-2px); }
+}
+
+.aqw-v2-fx-gem-twinkle {
+  animation: aqw-v2-twinkle 2.2s ease-in-out infinite;
+}
+@keyframes aqw-v2-twinkle {
+  0%, 100% { opacity: 0.55; filter: brightness(1); }
+  50%      { opacity: 1;    filter: brightness(1.15); }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .aqw-v2-char-body,
+  .aqw-v2-fx-sway,
+  .aqw-v2-fx-bobble,
+  .aqw-v2-fx-gem-twinkle {
+    animation: none !important;
+  }
+}
+
+/* ---- Calibrator (debug only) ---- */
+
+.aqw-v2-calibrator {
+  font-family: -apple-system, system-ui, sans-serif;
+  font-size: 12px;
+  background: #f7f3ec;
+  border: 1px solid #c8b896;
+  border-radius: 8px;
+  padding: 12px;
+  max-width: 360px;
+}
+
+.aqw-v2-calibrator h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #5C3A2E;
+}
+
+.aqw-v2-calibrator-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0;
+}
+
+.aqw-v2-calibrator-row label {
+  width: 64px;
+  color: #5C3A2E;
+}
+
+.aqw-v2-calibrator-row input[type="number"] {
+  width: 60px;
+  padding: 2px 4px;
+}
+
+.aqw-v2-calibrator-row input[type="range"] {
+  flex: 1;
+}
+
+.aqw-v2-calibrator pre {
+  font-size: 11px;
+  background: #fff;
+  padding: 6px;
+  border-radius: 4px;
+  overflow: auto;
+  margin-top: 6px;
+}
+
+.aqw-v2-error {
+  color: #b35c3a;
+  font-size: 12px;
+  padding: 8px;
+}

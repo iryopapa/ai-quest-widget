@@ -1,0 +1,471 @@
+{
+  "version": 2,
+  "_comment": "Stage frame 200x220. Slot positions are anchor centers in stage-local coords. Per-accessory offset/rotation/scale fine-tunes from there. Item SVG viewBox is 0 0 240 240, rendered at 100x100 host. Calibrate via AnchorCalibrator UI.",
+  "characters": {
+    "egg": {
+      "slots": {
+        "head_top": {
+          "x": 100,
+          "y": 35
+        },
+        "ear_left": {
+          "x": 65,
+          "y": 55
+        },
+        "ear_right": {
+          "x": 135,
+          "y": 55
+        },
+        "eye_center": {
+          "x": 100,
+          "y": 115
+        },
+        "neck": {
+          "x": 100,
+          "y": 155
+        },
+        "body_center": {
+          "x": 100,
+          "y": 180
+        }
+      },
+      "accessories": {
+        "ribbon": {
+          "slot": "head_top",
+          "offset": [
+            -26,
+            84
+          ],
+          "rotation": -8,
+          "scale": 0.65,
+          "fx": "css:sway",
+          "shadow": false
+        },
+        "hat": {
+          "slot": "head_top",
+          "offset": [
+            -92,
+            -10
+          ],
+          "rotation": 12,
+          "scale": 0.85,
+          "fx": "css:bobble"
+        },
+        "glasses": {
+          "slot": "eye_center",
+          "offset": [
+            -28,
+            -25
+          ],
+          "rotation": 0,
+          "scale": 0.55,
+          "fx": "",
+          "shadow": false
+        },
+        "crown": {
+          "slot": "head_top",
+          "offset": [
+            17,
+            -3
+          ],
+          "rotation": 35,
+          "scale": 0.65,
+          "fx": "css:gem-twinkle",
+          "shadow": false
+        },
+        "flower": {
+          "slot": "ear_left",
+          "offset": [
+            -80,
+            60
+          ],
+          "rotation": -10,
+          "scale": 0.7,
+          "fx": "css:sway"
+        },
+        "star": {
+          "slot": "body_center",
+          "offset": [
+            16,
+            -52
+          ],
+          "rotation": 0,
+          "scale": 0.75,
+          "fx": "css:gem-twinkle"
+        }
+      }
+    },
+    "chick": {
+      "slots": {
+        "head_top": {
+          "x": 100,
+          "y": 30
+        },
+        "ear_left": {
+          "x": 60,
+          "y": 50
+        },
+        "ear_right": {
+          "x": 140,
+          "y": 50
+        },
+        "eye_center": {
+          "x": 100,
+          "y": 110
+        },
+        "neck": {
+          "x": 100,
+          "y": 150
+        },
+        "body_center": {
+          "x": 100,
+          "y": 180
+        }
+      },
+      "accessories": {
+        "ribbon": {
+          "slot": "head_top",
+          "offset": [
+            -26,
+            84
+          ],
+          "rotation": -8,
+          "scale": 0.65,
+          "fx": "css:sway",
+          "shadow": false
+        },
+        "hat": {
+          "slot": "head_top",
+          "offset": [
+            -92,
+            -10
+          ],
+          "rotation": 12,
+          "scale": 0.85,
+          "fx": "css:bobble"
+        },
+        "glasses": {
+          "slot": "eye_center",
+          "offset": [
+            -29,
+            -32
+          ],
+          "rotation": 0,
+          "scale": 0.6,
+          "fx": "",
+          "shadow": false
+        },
+        "crown": {
+          "slot": "head_top",
+          "offset": [
+            21,
+            -4
+          ],
+          "rotation": 38,
+          "scale": 0.7,
+          "fx": "css:gem-twinkle",
+          "shadow": false
+        },
+        "flower": {
+          "slot": "ear_left",
+          "offset": [
+            -80,
+            60
+          ],
+          "rotation": -10,
+          "scale": 0.7,
+          "fx": "css:sway"
+        },
+        "star": {
+          "slot": "body_center",
+          "offset": [
+            16,
+            -52
+          ],
+          "rotation": 0,
+          "scale": 0.75,
+          "fx": "css:gem-twinkle"
+        }
+      }
+    },
+    "kitten": {
+      "slots": {
+        "head_top": {
+          "x": 100,
+          "y": 30
+        },
+        "ear_left": {
+          "x": 70,
+          "y": 45
+        },
+        "ear_right": {
+          "x": 130,
+          "y": 45
+        },
+        "eye_center": {
+          "x": 100,
+          "y": 110
+        },
+        "neck": {
+          "x": 100,
+          "y": 150
+        },
+        "body_center": {
+          "x": 100,
+          "y": 180
+        }
+      },
+      "accessories": {
+        "ribbon": {
+          "slot": "head_top",
+          "offset": [
+            -26,
+            84
+          ],
+          "rotation": -8,
+          "scale": 0.65,
+          "fx": "css:sway",
+          "shadow": false
+        },
+        "hat": {
+          "slot": "head_top",
+          "offset": [
+            -92,
+            -10
+          ],
+          "rotation": 12,
+          "scale": 0.85,
+          "fx": "css:bobble"
+        },
+        "glasses": {
+          "slot": "eye_center",
+          "offset": [
+            -28,
+            -30
+          ],
+          "rotation": 0,
+          "scale": 0.55,
+          "fx": "",
+          "shadow": false
+        },
+        "crown": {
+          "slot": "head_top",
+          "offset": [
+            -36,
+            -4
+          ],
+          "rotation": 0,
+          "scale": 0.7,
+          "fx": "css:gem-twinkle",
+          "shadow": false
+        },
+        "flower": {
+          "slot": "ear_left",
+          "offset": [
+            -80,
+            60
+          ],
+          "rotation": -10,
+          "scale": 0.7,
+          "fx": "css:sway"
+        },
+        "star": {
+          "slot": "body_center",
+          "offset": [
+            16,
+            -52
+          ],
+          "rotation": 0,
+          "scale": 0.75,
+          "fx": "css:gem-twinkle"
+        }
+      }
+    },
+    "rabbit": {
+      "slots": {
+        "head_top": {
+          "x": 100,
+          "y": 30
+        },
+        "ear_left": {
+          "x": 70,
+          "y": 25
+        },
+        "ear_right": {
+          "x": 130,
+          "y": 25
+        },
+        "eye_center": {
+          "x": 100,
+          "y": 115
+        },
+        "neck": {
+          "x": 100,
+          "y": 155
+        },
+        "body_center": {
+          "x": 100,
+          "y": 180
+        }
+      },
+      "accessories": {
+        "ribbon": {
+          "slot": "head_top",
+          "offset": [
+            -26,
+            84
+          ],
+          "rotation": -8,
+          "scale": 0.65,
+          "fx": "css:sway",
+          "shadow": false
+        },
+        "hat": {
+          "slot": "head_top",
+          "offset": [
+            -92,
+            -10
+          ],
+          "rotation": 12,
+          "scale": 0.85,
+          "fx": "css:bobble"
+        },
+        "glasses": {
+          "slot": "eye_center",
+          "offset": [
+            -28,
+            -25
+          ],
+          "rotation": 0,
+          "scale": 0.55,
+          "fx": "",
+          "shadow": false
+        },
+        "crown": {
+          "slot": "head_top",
+          "offset": [
+            -26,
+            25
+          ],
+          "rotation": 0,
+          "scale": 0.55,
+          "fx": "css:gem-twinkle",
+          "shadow": false
+        },
+        "flower": {
+          "slot": "ear_left",
+          "offset": [
+            -80,
+            60
+          ],
+          "rotation": -10,
+          "scale": 0.7,
+          "fx": "css:sway"
+        },
+        "star": {
+          "slot": "body_center",
+          "offset": [
+            16,
+            -52
+          ],
+          "rotation": 0,
+          "scale": 0.75,
+          "fx": "css:gem-twinkle"
+        }
+      }
+    },
+    "unicorn": {
+      "slots": {
+        "head_top": {
+          "x": 100,
+          "y": 30
+        },
+        "ear_left": {
+          "x": 70,
+          "y": 45
+        },
+        "ear_right": {
+          "x": 130,
+          "y": 45
+        },
+        "eye_center": {
+          "x": 100,
+          "y": 110
+        },
+        "neck": {
+          "x": 100,
+          "y": 150
+        },
+        "body_center": {
+          "x": 100,
+          "y": 180
+        }
+      },
+      "accessories": {
+        "ribbon": {
+          "slot": "head_top",
+          "offset": [
+            -26,
+            84
+          ],
+          "rotation": -8,
+          "scale": 0.65,
+          "fx": "css:sway",
+          "shadow": false
+        },
+        "hat": {
+          "slot": "head_top",
+          "offset": [
+            -92,
+            -10
+          ],
+          "rotation": 12,
+          "scale": 0.85,
+          "fx": "css:bobble"
+        },
+        "glasses": {
+          "slot": "eye_center",
+          "offset": [
+            -1,
+            -29
+          ],
+          "rotation": 0,
+          "scale": 0.5,
+          "fx": "",
+          "shadow": false
+        },
+        "crown": {
+          "slot": "head_top",
+          "offset": [
+            -30,
+            22
+          ],
+          "rotation": -27,
+          "scale": 0.55,
+          "fx": "css:gem-twinkle",
+          "shadow": false
+        },
+        "flower": {
+          "slot": "ear_left",
+          "offset": [
+            -80,
+            60
+          ],
+          "rotation": -10,
+          "scale": 0.7,
+          "fx": "css:sway"
+        },
+        "star": {
+          "slot": "body_center",
+          "offset": [
+            16,
+            -52
+          ],
+          "rotation": 0,
+          "scale": 0.75,
+          "fx": "css:gem-twinkle"
+        }
+      }
+    }
+  }
+}

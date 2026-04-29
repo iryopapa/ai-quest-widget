@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Quest - 新キャラ装着パイプライン Phase 1a 仮実装</title>
+  <style>
+    body {
+      font-family: -apple-system, system-ui, "Hiragino Kaku Gothic ProN", sans-serif;
+      background: #fef9f0;
+      color: #5C3A2E;
+      margin: 0;
+      padding: 24px;
+    }
+    h1 { font-size: 18px; margin: 0 0 6px; }
+    .subtitle { font-size: 12px; color: #8a6f5d; margin-bottom: 24px; }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 800px;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid #e8d9c0;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .panel h2 {
+      font-size: 14px;
+      margin: 0 0 12px;
+    }
+
+    .equip-controls {
+      margin-top: 12px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .equip-controls button {
+      padding: 6px 12px;
+      font-size: 12px;
+      background: #fff8eb;
+      border: 1px solid #d4b88f;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .equip-controls button.active {
+      background: #ffd47a;
+    }
+
+    .stage-host {
+      margin: 0 auto;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <h1>AI Quest - 新キャラ装着パイプライン (Phase 1a 仮実装)</h1>
+  <div class="subtitle">
+    既存PNG + 新装着システム。Lottie/SVGに置き換える前の動作検証用。<br>
+    ひよこ × {リボン, 帽子} のみ実装。
+  </div>
+
+  <div class="demo-grid">
+    <div class="panel">
+      <h2>Before（現行・参考）</h2>
+      <div id="before-host" class="stage-host"></div>
+      <div class="equip-controls" id="before-controls">
+        <button data-acc="ribbon">リボン</button>
+        <button data-acc="hat">ハット</button>
+        <button data-acc="glasses">めがね</button>
+        <button data-acc="crown">王冠</button>
+        <button data-acc="flower">花</button>
+        <button data-acc="star">星</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>After（新装着システム）</h2>
+      <div id="after-host" class="stage-host"></div>
+      <div class="equip-controls" id="after-controls">
+        <button data-acc="ribbon">リボン</button>
+        <button data-acc="hat">ハット</button>
+        <button data-acc="glasses">めがね</button>
+        <button data-acc="crown">王冠</button>
+        <button data-acc="flower">花</button>
+        <button data-acc="star">星</button>
+      </div>
+      <div class="equip-controls" style="margin-top:8px;">
+        <label style="font-size:12px;">キャラ:</label>
+        <select id="char-select">
+          <option value="egg">たまご</option>
+          <option value="chick" selected>ひよこ</option>
+          <option value="kitten">こねこ</option>
+          <option value="rabbit">うさぎ</option>
+          <option value="unicorn">ユニコーン</option>
+        </select>
+        <button id="all-on" style="margin-left:auto;">全装着</button>
+        <button id="all-off">全解除</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:24px; max-width:800px;">
+    <h2>装着位置キャリブレータ（Afterのアクセ調整用）</h2>
+    <div id="calibrator-host"></div>
+  </div>
+
+  <script type="module">
+    import './src/v2/v2.css';
+    import { CharacterViewV2 } from './src/v2/CharacterViewV2.js';
+    import { AnchorCalibrator } from './src/v2/AnchorCalibrator.js';
+    import { CharacterView } from './src/components/CharacterView.js';
+    import './src/widget.css'; // existing styles for Before view
+
+    // Minimal gameState mock (level 6 -> chick)
+    function makeMockGameState(level = 6, equipped = []) {
+      const state = { level, equippedItems: equipped, equippedBackground: null };
+      return {
+        get: (k) => state[k],
+        set: (k, v) => { state[k] = v; },
+      };
+    }
+
+    const beforeState = makeMockGameState(6, []);
+    const beforeView = new CharacterView(
+      document.getElementById('before-host'),
+      beforeState
+    );
+    beforeView.render();
+
+    const afterView = new CharacterViewV2(
+      document.getElementById('after-host'),
+      null,
+      { forceChar: 'chick', equipped: [] }
+    );
+    await afterView.render();
+
+    document.getElementById('char-select').addEventListener('change', async e => {
+      await afterView.setCharacter(e.target.value);
+      // Reapply current equipped after character change
+      afterView.setEquipped(afterView.options.equipped || []);
+      // Also rebuild calibrator for the new character
+      calibrator.charId = e.target.value;
+      calibrator._render();
+    });
+
+    function syncEquip(panelId, view, isCanvas, equipped) {
+      const buttons = document.querySelectorAll(`#${panelId} button[data-acc]`);
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const acc = btn.dataset.acc;
+          if (equipped.has(acc)) {
+            equipped.delete(acc);
+            btn.classList.remove('active');
+          } else {
+            equipped.add(acc);
+            btn.classList.add('active');
+          }
+          const list = Array.from(equipped);
+          if (isCanvas) {
+            beforeState.set('equippedItems', list);
+            beforeView.destroy();
+            beforeView.render();
+          } else {
+            afterView.setEquipped(list);
+          }
+        });
+      });
+    }
+    const beforeEquipped = new Set();
+    const afterEquipped = new Set();
+    syncEquip('before-controls', beforeView, true, beforeEquipped);
+    syncEquip('after-controls', afterView, false, afterEquipped);
+
+    // 全装着・全解除
+    const allAccs = ['ribbon', 'hat', 'glasses', 'crown', 'flower', 'star'];
+    document.getElementById('all-on').addEventListener('click', () => {
+      afterEquipped.clear();
+      allAccs.forEach(a => afterEquipped.add(a));
+      document.querySelectorAll('#after-controls button').forEach(b => b.classList.add('active'));
+      afterView.setEquipped(Array.from(afterEquipped));
+    });
+    document.getElementById('all-off').addEventListener('click', () => {
+      afterEquipped.clear();
+      document.querySelectorAll('#after-controls button').forEach(b => b.classList.remove('active'));
+      afterView.setEquipped([]);
+    });
+
+    // Calibrator
+    const calibrator = new AnchorCalibrator(
+      document.getElementById('calibrator-host'),
+      afterView
+    );
+  </script>
+</body>
+</html>
