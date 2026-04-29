@@ -1,7 +1,7 @@
 // Home Screen - Widget version
 // All classes prefixed with aqw-, all DOM queries use this.container.querySelector()
 // No StatusBar, no hunger-based messages, streak display added
-import { CharacterView } from '../components/CharacterView.js';
+import { CharacterViewV2 as CharacterView } from '../v2/CharacterViewV2.js';
 import { Character } from '../game/Character.js';
 import { getMultiplier } from '../game/StreakSystem.js';
 

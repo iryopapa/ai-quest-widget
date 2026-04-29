@@ -4,6 +4,7 @@
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
+@import './v2/v2.css';
 
 /* ============================================================
    1. Widget Root & Layout + Design Tokens

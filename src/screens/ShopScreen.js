@@ -1,7 +1,7 @@
 // Shop Screen - Widget version
 // All classes prefixed with aqw-, all DOM queries use this.container.querySelector()
 import { SHOP_ITEMS } from '../game/Character.js';
-import { CharacterView } from '../components/CharacterView.js';
+import { CharacterViewV2 as CharacterView } from '../v2/CharacterViewV2.js';
 
 import iconBack from '../assets/icon_back.png';
 import iconBox from '../assets/icon_box.png';
