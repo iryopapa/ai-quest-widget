@@ -6,11 +6,13 @@ import imgCrown from '../assets/item_crown.png';
 import imgFlower from '../assets/item_flower.png';
 import imgStar from '../assets/item_star.png';
 
-import eggImg from '../assets/char_egg.png';
-import chickImg from '../assets/char_chick.png';
-import kittenImg from '../assets/char_kitten.png';
-import rabbitImg from '../assets/char_rabbit.png';
-import unicornImg from '../assets/char_unicorn.png';
+// New v2 transparent PNGs (used as static thumbnails in evolution hints,
+// adventure map trail avatars, book/dex, quest celebration, etc.)
+import eggImg from '../v2/assets/raster/char_egg.png';
+import chickImg from '../v2/assets/raster/char_chick.png';
+import kittenImg from '../v2/assets/raster/char_kitten.png';
+import rabbitImg from '../v2/assets/raster/char_rabbit.png';
+import unicornImg from '../v2/assets/raster/char_unicorn.png';
 
 import iconBadge from '../assets/icon_badge.png';
 import iconCheck from '../assets/icon_check.png';

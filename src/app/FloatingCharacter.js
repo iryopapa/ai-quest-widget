@@ -1,17 +1,20 @@
 import { EVOLUTION_STAGES } from '../game/Character.js';
 
-// Character images
-import eggImg from '../assets/char_egg.png';
-import chickImg from '../assets/char_chick.png';
-import kittenImg from '../assets/char_kitten.png';
-import bunnyImg from '../assets/char_rabbit.png';
-import unicornImg from '../assets/char_unicorn.png';
+// New v2 character images (transparent PNG, hand-drawn vector source).
+// We use raster (not Lottie) here because the floating button is tiny and
+// always-visible; Lottie's per-frame rendering is unnecessary overhead.
+import eggImg from '../v2/assets/raster/char_egg.png';
+import chickImg from '../v2/assets/raster/char_chick.png';
+import kittenImg from '../v2/assets/raster/char_kitten.png';
+import rabbitImg from '../v2/assets/raster/char_rabbit.png';
+import unicornImg from '../v2/assets/raster/char_unicorn.png';
 
 const CHAR_IMAGES = {
   egg: eggImg,
   chick: chickImg,
   kitten: kittenImg,
-  bunny: bunnyImg,
+  bunny: rabbitImg,   // EVOLUTION_STAGES uses 'bunny' as id; v2 asset filename is 'rabbit'
+  rabbit: rabbitImg,
   unicorn: unicornImg,
 };
 
